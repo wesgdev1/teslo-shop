@@ -1,4 +1,6 @@
 "use client";
+import { useUiStore } from "@/store";
+import clsx from "clsx";
 import Link from "next/link";
 import {
   IoCloseOutline,
@@ -13,18 +15,40 @@ import {
 } from "react-icons/io5";
 
 export const Sidebar = () => {
+  const isSideMenuOpen = useUiStore((state) => state.isSideMenuOpen);
+  const closeMenu = useUiStore((state) => state.closeSideMenu);
+
   return (
     <div>
       {/* Background black */}
-      <div className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30"></div>
+      {isSideMenuOpen && (
+        <div className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30"></div>
+      )}
+
       {/* Blur */}
-      <div className="fade-in fixed top-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"></div>
+
+      {isSideMenuOpen && (
+        <div
+          onClick={() => {
+            closeMenu();
+          }}
+          className="fade-in fixed top-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"
+        ></div>
+      )}
+
       {/* Menu */}
-      <nav className="fixed p-5 right-0 top-0 w-[400px] h-screen bg-white z-20 shadow-2xl tranform transition-all duration-300">
+      <nav
+        className={clsx(
+          "fixed p-5 right-0 top-0 w-[400px] h-screen bg-white z-20 shadow-2xl tranform transition-all duration-300",
+          {
+            "translate-x-full": !isSideMenuOpen,
+          }
+        )}
+      >
         <IoCloseOutline
           width={50}
           onClick={() => {
-            console.log("Close sidebar");
+            closeMenu();
           }}
           className="absolute top-5 right-5 cursor-pointer"
         />
