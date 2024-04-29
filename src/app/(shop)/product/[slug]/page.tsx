@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { initialData } from "../../../../seed/seed";
 import { titleFont } from "@/config/fonts";
+import { SizeSelector } from "@/components";
 
 interface Props {
   params: {
@@ -34,6 +35,10 @@ export default function ProductPage({ params }: Props) {
         <p className="text-lg mb-5">{product.price}</p>
         {/* selector de tallas
          */}
+        <SizeSelector
+          selectedSize={product.sizes[0]}
+          avaliableSizes={product.sizes}
+        />
         {/* selector de cantidad */}
 
         <button className="btn-primary my-5">Agregar al carrito</button>
