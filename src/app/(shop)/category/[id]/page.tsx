@@ -1,20 +1,38 @@
+import { ProductGrid, Title } from "@/components";
+import { ValidCategories } from "@/interfaces";
+import { initialData } from "@/seed/seed";
 import { notFound } from "next/navigation";
 
+const seedProducts = initialData.products;
 interface Props {
   params: {
-    id: string;
+    id: ValidCategories;
   };
 }
 
 export default function CategoryPage({ params }: Props) {
   const { id } = params;
-  if (id === "kids") {
-    notFound();
-  }
+
+  const labels: Record<ValidCategories, string> = {
+    men: "para hombres",
+    women: "para mujeres",
+    kid: "para niños",
+    unisex: "para todos",
+  };
+
+  const products = seedProducts.filter((product) => product.gender === id);
+  // if (id === "kids") {
+  //   notFound();
+  // }
 
   return (
-    <div>
-      <h1>Category Page = {id}</h1>
-    </div>
+    <>
+      <Title
+        title={`Articulos de ${labels[id]}	`}
+        subtitle="Los mejores productos segun tu genero"
+        className="mb-2"
+      />
+      <ProductGrid products={products} />
+    </>
   );
 }
