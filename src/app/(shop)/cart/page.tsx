@@ -46,7 +46,7 @@ export default function CartPage() {
           </div>
 
           {/* Total */}
-          <div className="bg-white rounded-xl shadow-xl p-7">
+          <div className="bg-white rounded-xl shadow-xl p-7 h-[350px]">
             <h2 className="mb-2">Resumen de la orden</h2>
             <div className="grid grid-cols-2">
               <span>Numero de productos</span>

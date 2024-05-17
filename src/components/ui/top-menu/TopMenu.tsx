@@ -7,7 +7,7 @@ import { IoCartOutline, IoSearchOutline } from "react-icons/io5";
 export const TopMenu = () => {
   const openSideMenu = useUiStore((state) => state.openSideMenu);
   return (
-    <nav className="flex px-5 justify-between items-center w-full">
+    <nav className="flex px-5 pt-5 justify-between items-center w-full">
       {/* Logo */}
       <div>
         <Link href={"/"}>
